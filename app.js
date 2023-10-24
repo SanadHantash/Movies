@@ -34,11 +34,13 @@ app.get("/top",(request,response) => {
       const body = Buffer.concat(chunks);
       console.log(body.toString());
       let data = JSON.parse(body);
-      response.render('index.ejs',{movie:data})
+      const filteredMovies = data.filter((movie) => movie.genre == "Crime");
+      response.render('index.ejs',{movie:filteredMovies})
     });
   });
   req.end();
 });
+
 
 
 app.listen(port, () => {
